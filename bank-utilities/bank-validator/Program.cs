@@ -8,41 +8,25 @@ namespace bank_validator
     {
         static void Main(string[] args)
         {
-            // TestUtility.PrintGreetings();
-            // Console.ReadLine();
-            // biginteger
             string userInput;
-            string originalAccountNumber = "";
             int parsedAccountNumber = 0;
             bool notOk = true;
             while (notOk == true)
             {
-                Console.WriteLine("anna tilinumero 9-14 merkkia");
+                Console.Write("Enter an Account Number (9-14 characters):");
                 userInput = Console.ReadLine();
                 string errorMessage = "";
                 try
                 {
-                    Console.WriteLine("Tilinumerosi on: {0}", BbanValidator.ReadAccountNumber(userInput, parsedAccountNumber));
+                    Console.WriteLine("Your full Account Number is: {0}", BbanValidator.ReadAccountNumber(userInput, parsedAccountNumber));
+                    Console.WriteLine("Checksum is valid");
                 }
                 catch (Exception ex)
                 {
                     errorMessage = ex.Message;
-                    Console.WriteLine("Virhe on {0} ", errorMessage);
+                    Console.WriteLine("Error message: {0} ", errorMessage);
                     Console.ReadLine();
-
-                    /*   if (errorMessage != "")
-                       {
-                           notOk = true;
-                           errorMessage = "";
-                       }
-                       else
-                       {
-                           notOk = false;
-                       }
-
-                 Console.WriteLine("Tilinumerosi on: {0}", BbanValidator.ReadAccountNumber(originalAccountNumber, parsedAccountNumber));
-                 */            
-    }
+                }
                 notOk = false;
             }
             Console.ReadKey();
