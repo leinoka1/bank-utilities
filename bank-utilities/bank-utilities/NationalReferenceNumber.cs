@@ -21,27 +21,18 @@ namespace Ekoodi.Utilities.Bank
                 d = Convert.ToInt32(num.Substring(i, 1));
                 Console.Write(d);
                 if (a % 2 == 0)
-                {
                     d = d * 3;
-                    Console.WriteLine(" {0}", d);
-                }
                 else if (a % 3 == 0)
-                {
-                    d = d;
-                    Console.WriteLine(" {0}", d);
-                }
+                   d = d;
                 else
-                {
                     d = d * 7;
-                    Console.WriteLine(" {0}", d);
-                }
                 if (a == 3)
                     a = 0;
                 sum += d;
                 a++;
             }
-            Console.WriteLine("tulojen summa on {0}", sum);
-            Console.ReadKey();
+            //Console.WriteLine("tulojen summa on {0}", sum);
+            //Console.ReadKey();
             if ((10 - (sum % 10) == Convert.ToInt32(num.Substring(num.Length - 1))))
             {
                 return input;
@@ -52,6 +43,33 @@ namespace Ekoodi.Utilities.Bank
                 throw ex;
             }
             return input;
+
+        }
+        public static string NationalRefNumberCreateCheckSum(string input, string output)
+        {
+            string num = input, checkSum, natRefNum;
+            int sum = 0, d;
+            int a = 1;
+            for (int i = num.Length - 1; i >= 0; i--)
+            {
+                d = Convert.ToInt32(num.Substring(i, 1));
+                if (a % 2 == 0)
+                    d = d * 3;
+                else if (a % 3 == 0)
+                    d = d * 1;
+                else
+                    d = d * 7;
+                if (a == 3)
+                    a = 0;
+                sum += d;
+                a++;
+            }
+            if (10 - (sum % 10) == 10)
+                checkSum = "0";
+            else
+                checkSum = (10 - (sum % 10)).ToString();
+            natRefNum = input + checkSum;
+            return natRefNum;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace file_test
@@ -16,7 +17,6 @@ namespace file_test
                 // sr.ReadLine();
                 sr.ReadLine();
                 outx = sr.ReadToEnd();
-
                 Console.WriteLine(outx);
                 Console.ReadLine();
 

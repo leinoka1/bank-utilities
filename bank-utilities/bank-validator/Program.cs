@@ -36,9 +36,8 @@ namespace bank_validator
             */
             try
             {
-                // IbanValidator.ReadAccountNumber(ban, iban));
-                //   iban = IbanValidator.ReadBbanAccountNumber(bban, iban);
-                // bban = "90660500001234";
+                //IbanValidator.ReadAccountNumber(ban, iban);
+                bban = "50660500001234";
                 iban = IbanValidator.ReadBbanAccountNumber(bban, iban);
                 Console.WriteLine("IBAN is: {0}", iban);
 
@@ -55,23 +54,55 @@ namespace bank_validator
             // Nat Ref Number
             string natRefNum, output = "";
             // natRefNum = NationalRefNumberCheck(userInput, output);
-           
+
             try
-                {
-                    Console.WriteLine("Enter National Reference Number");
-                    userInput = Console.ReadLine();
-                    //Console.WriteLine("Your full Account Number is: {0}", BbanValidator.ReadAccountNumber(userInput, parsedAccountNumber));
-                    natRefNum = National_refernce_number.NationalRefNumberCheck(userInput, output);
-                    Console.WriteLine("National Reference Number {0} - OK",natRefNum);
-                }
-                catch (Exception ex)
-                {
+            {
+                Console.WriteLine("Enter National Reference Number");
+                userInput = Console.ReadLine();
+                //Console.WriteLine("Your full Account Number is: {0}", BbanValidator.ReadAccountNumber(userInput, parsedAccountNumber));
+                natRefNum = National_refernce_number.NationalRefNumberCheck(userInput, output);
+                Console.WriteLine("National Reference Number {0} - OK", natRefNum);
+            }
+            catch (Exception ex)
+            {
                 string errorMessage = "";
                 errorMessage = ex.Message;
-                    Console.WriteLine("Error message: {0} ", errorMessage);
-                    Console.ReadLine();
+                Console.WriteLine("Error message: {0} ", errorMessage);
+                Console.ReadLine();
+            }
+            Console.WriteLine("Enter National Reference Number without Checksum digit");
+            userInput = Console.ReadLine();
+            natRefNum = National_refernce_number.NationalRefNumberCreateCheckSum(userInput, output);
+            Console.WriteLine("National Reference Number: {0} ", natRefNum);
+            //
+            // Many NatRefNums
+            //
+            string userInputN, checkSum;
+            string groupedToFiveNumberBlocks;
+            int numOfNatRefNums, lastNumber = 0;
+            Console.WriteLine("Enter National Reference Number basepart");
+            userInput = Console.ReadLine();
+            Console.WriteLine("Enter amout of National Reference Numbers");
+            userInputN = Console.ReadLine();
+            int.TryParse(userInputN, out numOfNatRefNums);
+            long numericUserInput;
+            for (int i = 0; i < numOfNatRefNums; i++)
+            {
+                numericUserInput = Convert.ToInt64(userInput) + lastNumber;
+                natRefNum = National_refernce_number.NationalRefNumberCreateCheckSum(numericUserInput.ToString(), output);
+                groupedToFiveNumberBlocks = "";
+                int k = 0;
+                foreach (Char c in natRefNum)
+                {
+                    if (k % 5 == 0)
+                        groupedToFiveNumberBlocks = groupedToFiveNumberBlocks + " " + c;
+                    else
+                        groupedToFiveNumberBlocks = groupedToFiveNumberBlocks + c;
+                    k++;
                 }
-               
+                Console.WriteLine(groupedToFiveNumberBlocks);
+                lastNumber = lastNumber + 1;
+            }
             Console.ReadKey();
         }
     }
