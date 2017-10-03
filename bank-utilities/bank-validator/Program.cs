@@ -107,7 +107,7 @@ namespace bank_validator
             try
             {
                 string interNatRefNum = "RF712348231";
-                Console.WriteLine("Input: {0}",interNatRefNum);
+                Console.WriteLine("Input: {0}", interNatRefNum);
                 InterNatReferenceNumber.CheckIntNatRefNum(interNatRefNum, output);
             }
             catch (Exception ex)
@@ -120,7 +120,7 @@ namespace bank_validator
             // Create Int Nat Ref Numb
             string natRefNumx = "2348236";
             string groupedToFourNumberBlocks = "";
-            Console.WriteLine("National Reference number is: {0}",natRefNumx);
+            Console.WriteLine("National Reference number is: {0}", natRefNumx);
             //Console.WriteLine("International Reference number is: {0}",InterNatReferenceNumber.CreateIntNatRefNum(natRefNumx, output));
             int kk = 0;
             foreach (Char c in InterNatReferenceNumber.CreateIntNatRefNum(natRefNumx, output))
@@ -133,6 +133,45 @@ namespace bank_validator
             }
             Console.WriteLine("                International Reference number is: {0}", InterNatReferenceNumber.CreateIntNatRefNum(natRefNumx, output));
             Console.WriteLine("International Reference number as paper format is: {0}", groupedToFourNumberBlocks);
+            Console.ReadKey();
+            // Bar code
+            // V4
+            string euros,ibanN,ibanI,dueD,rf,barCode;
+            Console.WriteLine("(N)at or (I)nt");
+            userInput = Console.ReadLine();
+            if (userInput == "N")
+            {
+                //Console.WriteLine("Enter IBAN");
+                //ibanN = Console.ReadLine();
+                ibanN = "FI7944052020036082";
+                //Console.WriteLine("Enter euros eee,cc");
+                //euros = Console.ReadLine();
+                euros = "482,99";
+                //Console.WriteLine("Enter RF");
+                //rf = Console.ReadLine();
+                rf = "868516259619897";
+                //Console.WriteLine("Enter Due Date (yymmdd)");
+                //dueD = Console.ReadLine();
+                dueD = "100612";
+                barCode = BarCode.CreateVirtualBarCode4(ibanN, euros, rf, dueD);
+                Console.WriteLine("National bar code {0}", barCode);
+            }
+            else if (userInput == "I")
+            {
+                Console.WriteLine("Enter IBAN");
+                ibanI = Console.ReadLine();
+                Console.WriteLine("Enter euros eee,cc");
+                euros = Console.ReadLine();
+                //Console.WriteLine("Enter RF");
+                //rf = Console.ReadLine();
+                rf = "RF06559582243294671";
+                Console.WriteLine("Enter Due Date (yymmdd)");
+                dueD = Console.ReadLine();
+                barCode = BarCode.CreateVirtualBarCode5(ibanI, euros, rf, dueD);
+                Console.WriteLine("int bar code {0}",barCode);
+            }
+            else
+                Console.WriteLine("Version error");
             Console.ReadKey();
         }
     }
