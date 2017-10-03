@@ -103,6 +103,36 @@ namespace bank_validator
                 Console.WriteLine(groupedToFiveNumberBlocks);
                 lastNumber = lastNumber + 1;
             }
+            // Checking of International reference number 
+            try
+            {
+                string interNatRefNum = "RF712348231";
+                Console.WriteLine("Input: {0}",interNatRefNum);
+                InterNatReferenceNumber.CheckIntNatRefNum(interNatRefNum, output);
+            }
+            catch (Exception ex)
+            {
+                string errorMessage = "";
+                errorMessage = ex.Message;
+                Console.WriteLine("Error message: {0} ", errorMessage);
+                Console.ReadLine();
+            }
+            // Create Int Nat Ref Numb
+            string natRefNumx = "2348236";
+            string groupedToFourNumberBlocks = "";
+            Console.WriteLine("National Reference number is: {0}",natRefNumx);
+            //Console.WriteLine("International Reference number is: {0}",InterNatReferenceNumber.CreateIntNatRefNum(natRefNumx, output));
+            int kk = 0;
+            foreach (Char c in InterNatReferenceNumber.CreateIntNatRefNum(natRefNumx, output))
+            {
+                if (kk % 4 == 0 && kk != 0)
+                    groupedToFourNumberBlocks = groupedToFourNumberBlocks + " " + c;
+                else
+                    groupedToFourNumberBlocks = groupedToFourNumberBlocks + c;
+                kk++;
+            }
+            Console.WriteLine("                International Reference number is: {0}", InterNatReferenceNumber.CreateIntNatRefNum(natRefNumx, output));
+            Console.WriteLine("International Reference number as paper format is: {0}", groupedToFourNumberBlocks);
             Console.ReadKey();
         }
     }
