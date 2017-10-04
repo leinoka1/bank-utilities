@@ -146,32 +146,53 @@ namespace bank_validator
                 ibanN = "FI7944052020036082";
                 //Console.WriteLine("Enter euros eee,cc");
                 //euros = Console.ReadLine();
-                euros = "482,99";
+                euros = "4883,15";
                 //Console.WriteLine("Enter RF");
                 //rf = Console.ReadLine();
                 rf = "868516259619897";
-                //Console.WriteLine("Enter Due Date (yymmdd)");
+                //Console.WriteLine("Enter Due Date (dd.mm.yyyy)");
                 //dueD = Console.ReadLine();
-                dueD = "100612";
-                barCode = BarCode.CreateVirtualBarCode4(ibanN, euros, rf, dueD);
-                Console.WriteLine("National bar code {0}", barCode);
+                dueD = "12.06.2010";
+                try
+                {
+                    barCode = BarCode.CreateVirtualBarCode4(ibanN, euros, rf, dueD);
+                    Console.WriteLine("National Bank bar code is: {0}", barCode);
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = "";
+                    errorMessage = ex.Message;
+                    Console.WriteLine("Error message: {0} ", errorMessage);
+                }
             }
             else if (userInput == "I")
             {
-                Console.WriteLine("Enter IBAN");
-                ibanI = Console.ReadLine();
-                Console.WriteLine("Enter euros eee,cc");
-                euros = Console.ReadLine();
+                //Console.WriteLine("Enter IBAN");
+                //ibanI = Console.ReadLine();
+                ibanI = "FI7944052020036082";
+                //Console.WriteLine("Enter euros eee,cc");
+                //euros = Console.ReadLine();
+                euros = "4883,15";
                 //Console.WriteLine("Enter RF");
                 //rf = Console.ReadLine();
-                rf = "RF06559582243294671";
-                Console.WriteLine("Enter Due Date (yymmdd)");
-                dueD = Console.ReadLine();
-                barCode = BarCode.CreateVirtualBarCode5(ibanI, euros, rf, dueD);
-                Console.WriteLine("int bar code {0}",barCode);
+                rf = "RF09868516259619897";
+                //Console.WriteLine("Enter Due Date (dd.mm.yyyy)");
+                //dueD = Console.ReadLine();
+                dueD = "12.06.2010";
+                try
+                {
+                    barCode = BarCode.CreateVirtualBarCode5(ibanI, euros, rf, dueD);
+                    Console.WriteLine("International Bank bar code is: {0}", barCode);
+                }
+                catch (Exception ex)
+                {
+                    string errorMessage = "";
+                    errorMessage = ex.Message;
+                    Console.WriteLine("Error message: {0} ", errorMessage);
+                }
             }
             else
-                Console.WriteLine("Version error");
+                Console.WriteLine("Version error (Nationa/International)");
             Console.ReadKey();
         }
     }
